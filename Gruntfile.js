@@ -18,16 +18,24 @@ module.exports = function(grunt) {
       file: 'package.json',
       prefix: 'xtag-v',
       commit: true
+    },
+    connect: { 
+      server: {
+        options: {
+          port: 9002
+        }
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-bumpup');
   grunt.loadNpmTasks('grunt-tagrelease');
   grunt.loadNpmTasks('grunt-smush-components');
 
-  
+
   grunt.registerTask('build', ['jshint','smush-components']);
   grunt.registerTask('bump:patch', ['bumpup:patch', 'tagrelease']);
 

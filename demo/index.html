@@ -2,23 +2,60 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <title>Stub Demo - X-Tag</title>
-    <link rel="stylesheet" type="text/css" href="x-tag-components.css"/>
-	<link rel="stylesheet" type="text/css" href="../src/main.css"/>
+  <meta charset="utf-8" />
+  <title>Auto Suggest Demo - X-Tag</title>
+  <link rel="stylesheet" type="text/css" href="x-tag-components.css"/>
+	<link rel="stylesheet" type="text/css" href="../src/autosuggest.css"/>
 
-    <script type="text/javascript" src="x-tag-components.js"></script> 
-    <script type="text/javascript" src="../src/main.js"></script>      
+  <script type="text/javascript" src="x-tag-components.js"></script> 
+  <script type="text/javascript" src="../src/autosuggest.js"></script>      
 	<style>
-
+    #autosuggest {
+      width: 300px;
+      margin: 50px;
+    }
 	</style>
 </head>
 
 <body>
 
-	<h2>Create a Demo</h2>
+	<h2>Movie Auto Suggest</h2>
 
+  <x-autosuggest id="autosuggest" data-padding="2" data-url="http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=v695ukwehrcb5q8kwkrgjmbd&page_limit=10&page=1"></x-autosuggest>
+
+
+  <script type="text/javascript">
+    
+    document.addEventListener('beforerequest', function(event){
+      var element = event.target;
+      if (element.tagName == 'X-AUTOSUGGEST'){
+        element.xtag.request.url = element.xtag.request.url + '&q=' + element.value;
+      }
+    });
+
+    document.addEventListener('DOMComponentsLoaded', function(){
+
+      var autosuggest = document.getElementById('autosuggest');
+      autosuggest.dataready = function(request){
+        if (!request.responseText) return this;
+        request.responseText.movies.forEach(function(movie){
+          this.addSuggestion(movie.title, movie);
+        }, this);
+      };
+
+      autosuggest.addEventListener('beforerequest', function(event){
+        var element = event.target;
+        if (element.tagName == 'X-AUTOSUGGEST'){
+          element.xtag.request.url = element.xtag.request.url + '&q=' + element.value;
+        }
+      });
+    
+    }, false);
+    
+  </script>
 
 </body>
+
+
 
 </html>
