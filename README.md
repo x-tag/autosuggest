@@ -1,17 +1,38 @@
-# About
+# About 
 
-This repo is an X-Tag custom web-component stub that can be used as a starting point when building new elements.  It provides that basic tools and grunt tasks to get started.
+An autosuggest input provides automated hints and completion of textual value based on keyboard input.
 
-# Dev Setup
+# Syntax
 
-```
-Fork this repo, rename it, then clone it.
-
-$ npm install	// install bower tasks
-$ bower install	// install components
-$ grunt build   // build the dependencies
 
 ```
+  <x-autosuggest padding="2" url="http://yourwebsite.com/api/movies.json?page_limit=10&page=1"></x-autosuggest>
+```
+
+
+## Usage
+
+```
+  var autosuggest = document.getElementsByNames('x-autosuggest')[0];
+  // change the URL to send the input text
+  autosuggest.addEventListener('beforerequest', function(event){      
+    if (this.tagName == 'X-AUTOSUGGEST'){
+      // set the url
+      this.xtag.request.url = this.xtag.request.url + '&q=' + this.value;
+    }
+  });
+
+  // Process the resulting data
+  autosuggest.dataready = function(request){
+    if (!request.responseText) return this;
+    request.responseText.movies.forEach(function(movie){
+      this.addSuggestion(movie.title, movie);
+    }, this);
+  };
+
+```
+
+
 
 # Create X-Tag Components
 
@@ -20,5 +41,4 @@ $ grunt build   // build the dependencies
 # Use X-Tag Components
 
 [Using X-Tag components in your applications](https://github.com/x-tag/core/wiki/Using-X-Tag-Components-in-your-application)
-
 

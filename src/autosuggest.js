@@ -57,8 +57,8 @@
 			},
 			'keyup:delegate(input):keyfail(9, 13, 16, 17, 32, 37, 38, 39, 40, 91)': function(event){
 				var element = event.currentTarget;
-				var url = element.getAttribute('data-url'),
-					padding = element.getAttribute('data-padding') || 1;
+				var url = element.getAttribute('url'),
+					padding = element.getAttribute('padding') || 1;
 				if (url && this.value.length >= padding) element.src = url;				
 			},
 			'keyup:delegate(li):keypass(13)': printValue,
@@ -88,10 +88,10 @@
 				this.lastElementChild.innerHTML = '';
 			},
 			showSuggestions: function(){
-				this.lastElementChild.setAttribute('data-show-suggestions', true);
+				this.lastElementChild.setAttribute('show-suggestions', true);
 			},
 			hideSuggestions: function(){
-				this.lastElementChild.removeAttribute('data-show-suggestions');
+				this.lastElementChild.removeAttribute('show-suggestions');
 			}
 		}
 	});

@@ -6,7 +6,7 @@
 	"description": "An autosuggest input provides automated hints and completion of textual value based on keyboard input.",
 	"images": [],	
 	"categories": ["input"],
-	"demo": "demo",
+	"demo": "demo/index.html",
 	"compatibility": {	
 		"firefox": 5,
 		"chrome": 4,
