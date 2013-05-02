@@ -40,5 +40,5 @@ An autosuggest input provides automated hints and completion of textual value ba
 
 # Use X-Tag Components
 
-[Using X-Tag components in your applications](https://github.com/x-tag/core/wiki/Using-X-Tag-Components-in-your-application)
+[Using X-Tag components in your applications](https://github.com/x-tag/core/wiki/Using-our-Web-Components-in-Your-Application)
 
