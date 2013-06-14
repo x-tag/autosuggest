@@ -2,6 +2,15 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
+    connect: {
+      demo: {
+        options:{
+          port: 3001,
+          base: '',
+          keepalive: true
+        }
+      }
+    },
     jshint:{
       all: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js']
     },
@@ -16,15 +25,8 @@ module.exports = function(grunt) {
     bumpup: ['component.json', 'package.json', 'xtag.json'],
     tagrelease: {
       file: 'package.json',
-      prefix: 'xtag-v',
+      prefix: '',
       commit: true
-    },
-    connect: { 
-      server: {
-        options: {
-          port: 9002
-        }
-      }
     }
   });
 
@@ -35,9 +37,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-tagrelease');
   grunt.loadNpmTasks('grunt-smush-components');
 
-
   grunt.registerTask('build', ['jshint','smush-components']);
   grunt.registerTask('bump:patch', ['bumpup:patch', 'tagrelease']);
-
 
 };
