@@ -62,7 +62,7 @@
 				if (url && this.value.length >= padding) element.src = url;
 			},
 			'keyup:delegate(li):keypass(13)': printValue,
-			'click:delegate(li)': printValue,
+			'tap:delegate(li)': printValue,
 			'focus:delegate(li)': function(){
 				xtag.query(this.parentNode, '[selected="true"]').forEach(function(li){
 					li.removeAttribute('selected');
