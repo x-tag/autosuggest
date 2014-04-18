@@ -1,6 +1,6 @@
 
 (function(){
-	
+
 	var printValue = function(event){
 		var element = event.currentTarget;
 		if (this.parentNode == element.lastElementChild){
@@ -11,7 +11,7 @@
 			xtag.fireEvent(element, 'change');
 		}
 	};
-	
+
 	xtag.register('x-autosuggest', {
 		mixins: ['request'],
 		lifecycle: {
@@ -22,7 +22,7 @@
 		accessors: {
 			value: {
 				get: function(){
-					return this.firstElementChild.value;	
+					return this.firstElementChild.value;
 				}
 			},
 			name: {
@@ -42,14 +42,14 @@
 				var element = event.currentTarget;
 				event.preventDefault();
 				this.showSuggestions();
-				
-				var first = element.lastElementChild.firstElementChild;	
+
+				var first = element.lastElementChild.firstElementChild;
 				if (!first) return element;
-				
+
 				var selected = xtag.query(element, '[selected="true"]')[0];
 				if (selected) {
-					(event.keyCode - 38 ? 
-						selected.nextElementSibling || first : 
+					(event.keyCode - 38 ?
+						selected.nextElementSibling || first :
 						selected.previousElementSibling || element.lastElementChild.lastElementChild).focus();
 				} else {
 					first.focus();
@@ -59,7 +59,7 @@
 				var element = event.currentTarget;
 				var url = element.getAttribute('url'),
 					padding = element.getAttribute('padding') || 1;
-				if (url && this.value.length >= padding) element.src = url;				
+				if (url && this.value.length >= padding) element.src = url;
 			},
 			'keyup:delegate(li):keypass(13)': printValue,
 			'click:delegate(li)': printValue,
@@ -88,12 +88,12 @@
 				this.lastElementChild.innerHTML = '';
 			},
 			showSuggestions: function(){
-				this.lastElementChild.setAttribute('show-suggestions', true);
+				this.lastElementChild.setAttribute('data-show-suggestions', true);
 			},
 			hideSuggestions: function(){
-				this.lastElementChild.removeAttribute('show-suggestions');
+				this.lastElementChild.removeAttribute('data-show-suggestions');
 			}
 		}
 	});
-	
+
 })();
